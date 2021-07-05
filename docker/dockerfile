@@ -1,0 +1,9 @@
+# syntax=docker/dockerfile:1
+FROM ruby:2.7-alpine
+RUN apk add postgresql-dev
+COPY . /app
+WORKDIR /app
+RUN bundle install
+ENTRYPOINT ["bundle", "exec"]
+CMD ["exec"]
+
