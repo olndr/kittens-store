@@ -1,0 +1,17 @@
+# syntax=docker/dockerfile:1
+FROM ruby:2.4.9-alpine
+
+COPY . /app
+WORKDIR /app
+COPY Gemfile /app/
+COPY Gemfile.lock /usr/app/
+
+RUN apk add --update --no-cache \
+    postgresql \
+    postgresql-client \
+    postgresql-dev \
+    build-base
+
+RUN apk add ruby ruby-bundler
+
+RUN bundle install

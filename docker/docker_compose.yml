@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+    web:
+        container_name: app
+        image: bootcamp
+        ports:
+            - 1234:1234
+        command: ["sh", "/app/docker/run.sh"]
+        #command: rake db:create && rake db:migrate && rake db:seed && rackup --port 1234 --host '0.0.0.0'
+        depends_on:
+            - db
+
+        environment:
+            RACK_ENV: development
+            DATABASE_URL: postgres://postgres:postgres@DB:5432/kittens_store_dev
+    db:
+        container_name: DB
+        image: postgres
+        restart: always
+        tmpfs: 
+            - /var/lib/postgresql/data
+        environment:
+            #POSTGRES_DB: kittens_store_dev
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres   
+        ports:
+            - 5432:5432
