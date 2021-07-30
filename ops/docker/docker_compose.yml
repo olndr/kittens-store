@@ -4,7 +4,7 @@ services:
         container_name: app
         image: olndr/bootcamp
         ports:
-            - 80:80
+            - 80:1234
         command: ["sh", "/app/docker/run.sh"]
         #command: rake db:create && rake db:migrate && rake db:seed && rackup --port 1234 --host '0.0.0.0'
         depends_on:
